@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Avto raqamar</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbarInner">
+      <div class="brand">
+        <div class="brandTitle">Avto raqamar</div>
+        <div class="brandSub">nomer.txt → region + MAIN (copy faqat MAIN)</div>
+      </div>
+      <div class="statusPill" id="statusBadge">Yuklanmoqda…</div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panelTitle">Filtr</div>
+
+        <label class="lbl" for="regionFilter">Region tanlang</label>
+        <select id="regionFilter" class="select">
+          <option value="ALL">Hammasi</option>
+        </select>
+
+        <div class="available" id="availableRegionsText">Mavjud regionlar: —</div>
+
+        <label class="lbl" for="searchBox">Qidiruv (MAIN)</label>
+        <input id="searchBox" class="input" placeholder="K515 / A123 ..." />
+
+        <div class="statsRow">
+          <div class="pill" id="countPill">0 ta</div>
+          <button id="reloadBtn" class="btn btnOutline">Raqamlar qayta yuklash</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <details class="details">
+          <summary>TXT preview (ixtiyoriy)</summary>
+          <textarea id="txtMirror" placeholder="nomer.txt shu yerga ham ko‘rinadi..."></textarea>
+          <div class="row2">
+            <button id="applyMirrorBtn" class="btn btnOutline">Apply (textarea)</button>
+            <button id="clearBtn" class="btn btnGhost">Tozalash</button>
+          </div>
+          <div class="mini">
+            Agar <code>nomer.txt</code> o‘qilmasa, serverda oching:
+            <code>python3 -m http.server 5500</code> → <code>http://localhost:5500</code>
+          </div>
+        </details>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="viewerCard">
+        <div class="viewerHead">
+          <div>
+            <div class="viewerTitle">Raqam ko‘rinishi</div>
+            <div class="viewerMeta" id="viewerMeta">—</div>
+          </div>
+          <div class="viewerHint">Plate ustiga bosish ham copy qiladi</div>
+        </div>
+
+        <div class="bigPlateWrap">
+          <div class="bigPlate" id="bigPlate" title="Bosish = MAIN copy (region copy bo‘lmaydi)">
+            <div class="dot left"></div>
+
+            <div class="regionBox">
+              <div class="regionText" id="bigRegion">--</div>
+            </div>
+
+            <div class="dividerPlate"></div>
+
+            <div class="mainBox">
+              <div class="mainText" id="bigMain">------</div>
+
+              <div class="uzArea">
+                <div class="flag">
+                  <div class="b"></div>
+                  <div class="w"><div class="r1"></div><div class="r2"></div></div>
+                  <div class="g"></div>
+                </div>
+                <div class="uzLabel">UZ</div>
+              </div>
+            </div>
+
+            <div class="dot right"></div>
+          </div>
+        </div>
+
+        <!-- NAV: prev | copy | next -->
+        <div class="navRow">
+          <button id="prevBtn" class="btnNav btnPrev">⬅ Oldingi</button>
+          <button id="copyCurrentBtn" class="btnNav btnCopy">Copy</button>
+          <button id="nextBtn" class="btnNav btnNext">Keyingi ➡</button>
+        </div>
+
+        <!-- Last copied -->
+        <div class="lastBox" id="lastBox" style="display:none;">
+          <div class="lastTitle">Eslatma: oxirgi copy qilingan</div>
+          <div class="lastRow">
+            <span class="k">MAIN:</span> <code id="lastMain">------</code>
+            <span class="k">Region:</span> <code id="lastRegion">--</code>
+          </div>
+        </div>
+
+        <div class="emptyState" id="emptyState">
+          Hali ma’lumot yo‘q. <b>Raqamlar qayta yuklash</b> bosing yoki TXT preview’dan Apply qiling.
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast">Copied ✅</div>
+  <script src="./app.js"></script>
+</body>
+</html>
